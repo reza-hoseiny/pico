@@ -120,3 +120,31 @@ if __name__ == "__main__" :
     led.high()
     main()
     led.low()
+
+
+from machine import Pin
+import utime
+
+# measuring_time
+def main_measuring_time():
+    led = Pin(25,Pin.OUT)
+    print(utime.localtime())
+    for i in range(10):
+        #print(i)
+        led.high()
+        utime.sleep_ms(i*40)
+        led.low()
+        utime.sleep_ms(i*40)
+
+
+if __name__ == "__main__" :
+    #led.high()
+    #utime.sleep(1) #Sleep for the given number of seconds
+    start_ms = utime.ticks_ms()#increasing millisecond counter with an arbitrary reference point
+    start_us = utime.ticks_us()
+    print("Starting point {}\t\t {}".format(start_ms, start_us))
+    main_measuring_time()
+    utime.sleep(1)
+    finish_ms = utime.ticks_ms()#increasing millisecond counter with an arbitrary reference point
+    finish_us = utime.ticks_us()
+    print("Interval length: {} ms \t\t {} us".format(finish_ms - start_ms, finish_us- start_us))
